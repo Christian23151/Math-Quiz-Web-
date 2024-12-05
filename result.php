@@ -1,14 +1,14 @@
 <?php
 session_start();
 
-// Retrieve quiz data
+
 $quiz = $_SESSION['quiz'];
 $total_questions = count($quiz['questions']);
 $correct = $quiz['correct'];
 $wrong = $quiz['wrong'];
 $grade = round(($correct / $total_questions) * 100);
 
-// Clear session
+
 unset($_SESSION['quiz']);
 ?>
 
