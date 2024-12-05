@@ -13,9 +13,9 @@ if (!isset($_SESSION['quiz'])) {
 }
 
 
-$quiz = &$_SESSION['quiz']; // Reference the session quiz data
+$quiz = &$_SESSION['quiz']; 
 
-// Check user's answer
+
 $remark = "";
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['answer'])) {
     $currentQuestion = $quiz['questions'][$quiz['current']];
@@ -29,13 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['answer'])) {
     $quiz['current']++;
 }
 
-// End quiz if all questions are answered
+
 if ($quiz['current'] >= count($quiz['questions'])) {
     header("Location: result.php");
     exit;
 }
 
-// Generate the current question
+
 $currentQuestion = $quiz['questions'][$quiz['current']];
 ?>
 
@@ -77,7 +77,7 @@ $currentQuestion = $quiz['questions'][$quiz['current']];
 </html>
 
 <?php
-// Function to generate questions
+
 function generateQuestions($numQuestions, $operator, $difficulty) {
     $questions = [];
     $range = match ($difficulty) {
@@ -97,7 +97,7 @@ function generateQuestions($numQuestions, $operator, $difficulty) {
             default => 0,
         };
 
-        // Generate choices
+        
         $choices = [$answer];
         while (count($choices) < 4) {
             $wrongChoice = rand($range[0], $range[1]) * ($operator === 'multiply' ? rand(1, 2) : 1);
@@ -124,7 +124,6 @@ function generateQuestions($numQuestions, $operator, $difficulty) {
 }
 
 
-// Function to generate answer choices
 function generateChoices($correct) {
     $choices = [$correct];
     while (count($choices) < 4) {
